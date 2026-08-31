@@ -7,9 +7,11 @@ import { SettingsPage } from "./pages/SettingsPage";
 import { WeekPage } from "./pages/WeekPage";
 import { StartWorkoutRedirect, WorkoutPage } from "./pages/WorkoutPage";
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
+
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename === "/" ? undefined : basename}>
       <Routes>
         <Route element={<AppShell />}>
           <Route index element={<HomePage />} />

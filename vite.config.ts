@@ -3,7 +3,10 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { VitePWA } from "vite-plugin-pwa";
 
+const base = process.env.VITE_BASE || "/";
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -20,10 +23,11 @@ export default defineConfig({
         display: "standalone",
         orientation: "portrait-primary",
         lang: "fi",
-        start_url: "/",
+        start_url: base,
+        scope: base,
         icons: [
           {
-            src: "/icon.svg",
+            src: "icon.svg",
             sizes: "any",
             type: "image/svg+xml",
             purpose: "any maskable",
