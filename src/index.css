@@ -1,0 +1,500 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Bebas Neue", sans-serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+  --color-bg: #0c1210;
+  --color-surface: #151c18;
+  --color-surface-2: #1c2620;
+  --color-border: #2a3830;
+  --color-ink: #eef3ee;
+  --color-muted: #8a9a90;
+  --color-accent: #e8ff6a;
+  --color-accent-dim: #a8c03a;
+  --color-danger: #ff6b5a;
+  --color-ok: #5dffb0;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-ink);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232, 255, 106, 0.08), transparent),
+    linear-gradient(180deg, #0c1210 0%, #0a100e 100%);
+  background-attachment: fixed;
+}
+
+@keyframes pulse-ring {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 255, 106, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(232, 255, 106, 0);
+  }
+}
+
+@keyframes check-pop {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 1.4s ease-in-out infinite;
+}
+
+.animate-check-pop {
+  animation: check-pop 0.28s ease-out;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Movement demos — CSS stick-figure loops */
+.movement-svg g {
+  transform-box: fill-box;
+}
+
+@keyframes mv-bob-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes mv-bob-up {
+  0%,
+  100% {
+    transform: translateY(6px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes mv-open-arms {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(1.18);
+  }
+}
+
+@keyframes mv-pressdown {
+  0%,
+  100% {
+    transform: translateY(-4px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes mv-skull {
+  0%,
+  100% {
+    transform: translateY(-2px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(2px) rotate(-6deg);
+  }
+}
+
+@keyframes mv-oh-tri {
+  0%,
+  100% {
+    transform: rotate(8deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes mv-calf {
+  0%,
+  100% {
+    transform: translateY(4px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes mv-row {
+  0%,
+  100% {
+    transform: translateX(4px);
+  }
+  50% {
+    transform: translateX(-4px);
+  }
+}
+
+@keyframes mv-pulldown {
+  0%,
+  100% {
+    transform: translateY(-6px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes mv-sa {
+  0%,
+  100% {
+    transform: rotate(-12deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes mv-curl {
+  0%,
+  100% {
+    transform: translateY(4px) scaleY(1);
+  }
+  50% {
+    transform: translateY(-2px) scaleY(0.92);
+  }
+}
+
+@keyframes mv-lateral {
+  0%,
+  100% {
+    transform: scaleX(0.82);
+  }
+  50% {
+    transform: scaleX(1.12);
+  }
+}
+
+@keyframes mv-front {
+  0%,
+  100% {
+    transform: rotate(18deg);
+  }
+  50% {
+    transform: rotate(-8deg);
+  }
+}
+
+@keyframes mv-rear {
+  0%,
+  100% {
+    transform: scaleX(0.85);
+  }
+  50% {
+    transform: scaleX(1.1);
+  }
+}
+
+@keyframes mv-shrug {
+  0%,
+  100% {
+    transform: translateY(3px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes mv-upright {
+  0%,
+  100% {
+    transform: translateY(6px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes mv-squat {
+  0%,
+  100% {
+    transform: translateY(-4px) scaleY(1);
+  }
+  50% {
+    transform: translateY(8px) scaleY(0.9);
+  }
+}
+
+@keyframes mv-legpress {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes mv-legext {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-12deg);
+  }
+}
+
+@keyframes mv-hinge {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+}
+
+@keyframes mv-legcurl {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(14deg);
+  }
+}
+
+@keyframes mv-crunch {
+  0%,
+  100% {
+    transform: rotate(-6deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes mv-hip {
+  0%,
+  100% {
+    transform: translateY(6px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes mv-hang {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-16deg);
+  }
+}
+
+@keyframes mv-side {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes mv-plank {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes mv-chop {
+  0%,
+  100% {
+    transform: rotate(-18deg);
+  }
+  50% {
+    transform: rotate(16deg);
+  }
+}
+
+@keyframes mv-generic {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.mv-press-y {
+  animation: mv-bob-y 1.35s ease-in-out infinite;
+  transform-origin: 50px 50px;
+}
+.mv-press-up {
+  animation: mv-bob-up 1.3s ease-in-out infinite;
+  transform-origin: 50px 70px;
+}
+.mv-flye {
+  animation: mv-open-arms 1.4s ease-in-out infinite;
+  transform-origin: 50px 40px;
+}
+.mv-pressdown {
+  animation: mv-pressdown 1.25s ease-in-out infinite;
+  transform-origin: 50px 20px;
+}
+.mv-skull {
+  animation: mv-skull 1.3s ease-in-out infinite;
+  transform-origin: 50px 40px;
+}
+.mv-oh-tri {
+  animation: mv-oh-tri 1.35s ease-in-out infinite;
+  transform-origin: 50px 36px;
+}
+.mv-calf {
+  animation: mv-calf 1.1s ease-in-out infinite;
+  transform-origin: 50px 86px;
+}
+.mv-row {
+  animation: mv-row 1.25s ease-in-out infinite;
+}
+.mv-pulldown {
+  animation: mv-pulldown 1.3s ease-in-out infinite;
+  transform-origin: 50px 16px;
+}
+.mv-sa-pull {
+  animation: mv-sa 1.35s ease-in-out infinite;
+  transform-origin: 50px 30px;
+}
+.mv-curl {
+  animation: mv-curl 1.2s ease-in-out infinite;
+  transform-origin: 50px 60px;
+}
+.mv-lateral {
+  animation: mv-lateral 1.35s ease-in-out infinite;
+  transform-origin: 50px 36px;
+}
+.mv-front {
+  animation: mv-front 1.3s ease-in-out infinite;
+  transform-origin: 50px 40px;
+}
+.mv-rear {
+  animation: mv-rear 1.35s ease-in-out infinite;
+  transform-origin: 50px 40px;
+}
+.mv-shrug {
+  animation: mv-shrug 1.15s ease-in-out infinite;
+}
+.mv-upright {
+  animation: mv-upright 1.25s ease-in-out infinite;
+}
+.mv-squat {
+  animation: mv-squat 1.4s ease-in-out infinite;
+  transform-origin: 50px 80px;
+}
+.mv-legpress {
+  animation: mv-legpress 1.3s ease-in-out infinite;
+}
+.mv-legext {
+  animation: mv-legext 1.25s ease-in-out infinite;
+  transform-origin: 50px 58px;
+}
+.mv-hinge {
+  animation: mv-hinge 1.4s ease-in-out infinite;
+  transform-origin: 50px 58px;
+}
+.mv-legcurl {
+  animation: mv-legcurl 1.25s ease-in-out infinite;
+  transform-origin: 50px 58px;
+}
+.mv-crunch {
+  animation: mv-crunch 1.3s ease-in-out infinite;
+  transform-origin: 50px 58px;
+}
+.mv-hip {
+  animation: mv-hip 1.25s ease-in-out infinite;
+  transform-origin: 50px 70px;
+}
+.mv-hang {
+  animation: mv-hang 1.35s ease-in-out infinite;
+  transform-origin: 50px 20px;
+}
+.mv-side {
+  animation: mv-side 1.4s ease-in-out infinite;
+  transform-origin: 50px 70px;
+}
+.mv-plank {
+  animation: mv-plank 1.6s ease-in-out infinite;
+}
+.mv-chop {
+  animation: mv-chop 1.35s ease-in-out infinite;
+  transform-origin: 50px 50px;
+}
+.mv-generic {
+  animation: mv-generic 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mv-press-y,
+  .mv-press-up,
+  .mv-flye,
+  .mv-pressdown,
+  .mv-skull,
+  .mv-oh-tri,
+  .mv-calf,
+  .mv-row,
+  .mv-pulldown,
+  .mv-sa-pull,
+  .mv-curl,
+  .mv-lateral,
+  .mv-front,
+  .mv-rear,
+  .mv-shrug,
+  .mv-upright,
+  .mv-squat,
+  .mv-legpress,
+  .mv-legext,
+  .mv-hinge,
+  .mv-legcurl,
+  .mv-crunch,
+  .mv-hip,
+  .mv-hang,
+  .mv-side,
+  .mv-plank,
+  .mv-chop,
+  .mv-generic {
+    animation: none;
+  }
+}
