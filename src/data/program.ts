@@ -1,3 +1,5 @@
+import { exerciseVideoUrl } from "./exerciseVideos.ts";
+
 /** Jim Stoppani Shortcut to Size — program structure for personal tracker use. */
 
 export type RepCategory = "main" | "calves" | "abs" | "timed";
@@ -7,6 +9,7 @@ export type WorkoutDayId = 1 | 2 | 3 | 4;
 export interface ExerciseTemplate {
   id: string;
   name: string;
+  videoUrl?: string;
   sets: number;
   category: RepCategory;
   /** Rest seconds between sets */
@@ -88,7 +91,7 @@ function ex(
   category: RepCategory,
   restSec: number,
 ): ExerciseTemplate {
-  return { id, name, sets, category, restSec };
+  return { id, name, sets, category, restSec, videoUrl: exerciseVideoUrl(name) };
 }
 
 const absW1 = (prefix: string): ExerciseTemplate[] => [

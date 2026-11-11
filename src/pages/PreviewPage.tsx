@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from "react-router-dom";
 import { MovementDemo } from "../components/MovementDemo";
+import { ExerciseVideoLink } from "../components/ExerciseVideoLink";
 import {
   getIntensityLabelFi,
   getRepRange,
@@ -80,6 +81,7 @@ export function PreviewPage() {
                   {ex.category === "timed" ? "" : " reps"}
                   {resolved.intensity !== "none" ? " · +" + (resolved.intensity === "rest-pause" ? "RP" : "drop") : ""}
                 </p>
+                <ExerciseVideoLink exercise={ex} />
               </div>
             </li>
           );

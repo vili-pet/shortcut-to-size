@@ -5,6 +5,7 @@ import type { ExerciseLog, LoggedSet } from "../store/useAppStore";
 import { formatWeight } from "../lib/hooks";
 import { MOVEMENT_LABEL_FI, movementKindFor } from "../lib/movement";
 import { MovementDemo } from "./MovementDemo";
+import { ExerciseVideoLink } from "./ExerciseVideoLink";
 
 interface Props {
   exercise: ExerciseTemplate;
@@ -44,6 +45,7 @@ export function ExerciseCard({
             {exercise.sets} × {repsLabel}
             {exercise.category === "timed" ? "" : " reps"}
           </p>
+          <ExerciseVideoLink exercise={exercise} />
         </div>
         <button
           type="button"
