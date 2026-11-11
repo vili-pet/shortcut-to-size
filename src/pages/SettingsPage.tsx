@@ -1,10 +1,11 @@
 import { useRef, useState } from "react";
+import { ReminderSettings } from "../components/ReminderSettings";
 import { attribution } from "../data/program";
 import { downloadGistBackup, uploadGistBackup } from "../lib/gistSync";
-import { isValidPin } from "../lib/pin";
+import { isNative } from "../lib/native";
 import { useProgramWeek } from "../lib/hooks";
 import { useAppStore } from "../store/useAppStore";
-import { useLockStore } from "../store/useLockStore";
+import { useBackupStore } from "../store/useBackupStore";
 
 export function SettingsPage() {
   const startDate = useAppStore((s) => s.startDate);
@@ -16,18 +17,14 @@ export function SettingsPage() {
   const resetAll = useAppStore((s) => s.resetAll);
   const programWeek = useProgramWeek();
 
-  const lockNow = useLockStore((s) => s.lockNow);
-  const changePin = useLockStore((s) => s.changePin);
-  const gistToken = useLockStore((s) => s.gistToken);
-  const gistId = useLockStore((s) => s.gistId);
-  const setGistToken = useLockStore((s) => s.setGistToken);
-  const setGistId = useLockStore((s) => s.setGistId);
+  const gistToken = useBackupStore((s) => s.gistToken);
+  const gistId = useBackupStore((s) => s.gistId);
+  const setGistToken = useBackupStore((s) => s.setGistToken);
+  const setGistId = useBackupStore((s) => s.setGistId);
 
   const fileRef = useRef<HTMLInputElement>(null);
   const [msg, setMsg] = useState("");
   const [err, setErr] = useState("");
-  const [curPin, setCurPin] = useState("");
-  const [newPin, setNewPin] = useState("");
   const [busyCloud, setBusyCloud] = useState(false);
 
   const flash = (ok: string) => {
@@ -97,57 +94,7 @@ export function SettingsPage() {
         </p>
       </div>
 
-      <section className="flex flex-col gap-3 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] p-4">
-        <h2 className="text-xs font-medium uppercase tracking-wider text-[var(--color-muted)]">
-          Lukitus
-        </h2>
-        <button
-          type="button"
-          onClick={lockNow}
-          className="rounded-xl bg-[var(--color-surface-2)] py-3 font-medium"
-        >
-          Lukitse nyt
-        </button>
-        <label className="flex flex-col gap-1.5">
-          <span className="text-xs text-[var(--color-muted)]">Nykyinen PIN</span>
-          <input
-            type="password"
-            inputMode="numeric"
-            value={curPin}
-            onChange={(e) => setCurPin(e.target.value.replace(/\D/g, "").slice(0, 8))}
-            className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2.5 outline-none focus:border-[var(--color-accent)]"
-          />
-        </label>
-        <label className="flex flex-col gap-1.5">
-          <span className="text-xs text-[var(--color-muted)]">Uusi PIN (4–8 numeroa)</span>
-          <input
-            type="password"
-            inputMode="numeric"
-            value={newPin}
-            onChange={(e) => setNewPin(e.target.value.replace(/\D/g, "").slice(0, 8))}
-            className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2.5 outline-none focus:border-[var(--color-accent)]"
-          />
-        </label>
-        <button
-          type="button"
-          onClick={async () => {
-            if (!isValidPin(newPin)) {
-              fail("Uusi PIN: 4–8 numeroa.");
-              return;
-            }
-            const res = await changePin(curPin, newPin);
-            if (res === "ok") {
-              setCurPin("");
-              setNewPin("");
-              flash("PIN vaihdettu.");
-            } else if (res === "bad") fail("Nykyinen PIN väärin.");
-            else fail("Uusi PIN epäkelpo.");
-          }}
-          className="rounded-xl bg-[var(--color-surface-2)] py-3 font-medium"
-        >
-          Vaihda PIN
-        </button>
-      </section>
+      {isNative && <ReminderSettings flash={flash} fail={fail} />}
 
       <label className="flex flex-col gap-2">
         <span className="text-xs uppercase tracking-wider text-[var(--color-muted)]">
@@ -259,7 +206,7 @@ export function SettingsPage() {
         <button
           type="button"
           onClick={() => {
-            if (confirm("Nollataanko kaikki lokit ja treeniasetukset? (PIN säilyy)")) {
+            if (confirm("Nollataanko kaikki lokit ja treeniasetukset?")) {
               resetAll();
               flash("Treenidata nollattu.");
             }

@@ -1,9 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { isNative } from "../lib/native";
 
 const links = [
   { to: "/", label: "Koti", end: true },
   { to: "/viikko", label: "Viikko" },
   { to: "/historia", label: "Historia" },
+  ...(isNative ? [{ to: "/edistyminen", label: "Edistyminen" }] : []),
   { to: "/asetukset", label: "Asetukset" },
 ];
 
@@ -22,7 +24,9 @@ export function AppShell() {
       </main>
 
       <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--color-border)] bg-[var(--color-surface)]/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md">
-        <div className="mx-auto grid max-w-lg grid-cols-4">
+        <div
+          className={`mx-auto grid max-w-lg ${isNative ? "grid-cols-5" : "grid-cols-4"}`}
+        >
           {links.map((l) => (
             <NavLink
               key={l.to}
@@ -30,7 +34,7 @@ export function AppShell() {
               end={l.end}
               className={({ isActive }) =>
                 [
-                  "flex flex-col items-center gap-0.5 py-3 text-xs font-medium transition-colors",
+                  `flex flex-col items-center gap-0.5 py-3 font-medium transition-colors ${isNative ? "text-[11px]" : "text-xs"}`,
                   isActive
                     ? "text-[var(--color-accent)]"
                     : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
